@@ -37,7 +37,7 @@ function Header({contractState,balance,setBalance,setLoading,setLoadingMessage})
             </span>
         </div>
         <div className="coinBalance">
-            {balance && balance.slice(0,balance.indexOf("."))} <img src='/flipCoin.png' width={40} alt='flipcoin image'/>
+            {balance && balance.slice(0,balance.indexOf("."))} <img src='/FlipCoin.png' width={40} alt='flipcoin image'/>
         </div>
         <div className="headerButtons">
             <div className="headerButton" onClick={()=> navigate('/rewards')}>

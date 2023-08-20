@@ -1,0 +1,72 @@
+body{
+    margin: 0;
+}
+.headerContainer{
+    min-height: 450px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+.headerBg{
+    background-color: #2874F0;
+}
+.yellow{
+    color: #FFB800;
+}
+.headerImage>img{
+    width: 450px;
+    margin-top:-25px ;
+}
+.headerContent{
+    font-family:"Quicksand",sans-serif;
+    font-size: 3rem;
+    color: white;
+    display: flex;
+    margin-top: -100px;
+}
+.boldHeading{
+    font-weight: 700;
+    margin-right: 1.5rem;
+}
+.lightHeading{
+    font-weight: 400;
+}
+.coinBalance{
+    color: #052699;
+    font-family: "Quicksand",sans-serif;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    width: 200px;
+    margin: 1rem;
+    margin-bottom:0;
+    padding-left: 1rem;
+}
+.coinBalance>img{
+    margin-top: 5px;
+}
+.headerButtons{
+    display: flex;
+    margin-bottom: 20px;
+}
+.headerButton{
+    border-radius: 40px;
+    border: 2px dashed #E1E1E1;
+    padding: 0.8rem 2rem;
+   /* TypoGraphy  */
+    color: #FFF;
+    text-align: center;
+    font-family: "Quicksand";
+    font-size: 1rem;
+    font-weight: 400;
+    margin:1.5rem;
+}
+.headerButton:hover{
+    cursor: pointer;
+}

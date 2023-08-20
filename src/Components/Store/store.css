@@ -1,0 +1,79 @@
+.products{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 25px;
+}
+.product{
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 2px 2px 20px rgb(150, 150, 150);
+    font-family:"Quicksand",sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 1rem;
+}
+.productImageContainer{
+    width: 300px !important;
+    max-height:300px !important;
+    overflow: hidden;
+}
+.productImage{
+    border-radius: 10px;
+}
+
+.productDetails{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+.productBrandName{
+    margin-left: 1.5rem;
+}
+.productCost{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 1rem;
+    color: white;
+    font-weight: 500;
+    font-size: 1rem;
+    padding:0.5rem 1rem;
+    background-color: #2874F0;
+    border-radius: 0.2rem;
+}
+.productCost:hover{
+    cursor: pointer;
+}
+.productCost>img{
+    margin-top: 2px;
+}
+
+.loader {
+    border: 6px solid #f3f3f3; /* Light grey */
+    border-top: 6px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: auto;
+    margin-top: 20px;
+}
+.bought{
+    color: rgb(0, 0, 0);
+    font-weight: 600;
+    background-color: #FFB800;
+    padding:0.88rem 2rem;
+}
+.bought:hover{
+    cursor: default;
+}
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }

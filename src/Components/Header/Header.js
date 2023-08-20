@@ -1,10 +1,26 @@
 import React, { useState } from 'react'
 import './header.css'
 import { useLocation, useNavigate } from 'react-router-dom';
+const ethers = require("ethers")
 
-function Header({currRoute}) {
+function Header({contractState,balance,setBalance,setLoading,setLoadingMessage}) {
 
-    const navigate = useNavigate();
+    const navigate=useNavigate();
+
+    const allocateFreeTokens =async ()=>{
+        setLoadingMessage("Allocating 100 Tokens ");
+        setLoading(true);
+        try{
+        const {contract,signer}=contractState;
+        await contract._mintTo(signer.address,ethers.parseEther("100"));
+        const balanceBigInt=await contract._getBalance(signer.address);
+        setBalance(ethers.toNumber(balanceBigInt));            
+        }
+        catch(e){
+            alert(e.message);
+        }
+        setLoading(false);
+    }
 
   return (
     <div className='headerContainer headerBg'>
@@ -21,7 +37,7 @@ function Header({currRoute}) {
             </span>
         </div>
         <div className="coinBalance">
-            114 <img src='/flipCoin.png' width={40} alt='flipcoin image'/>
+            {balance} <img src='/flipCoin.png' width={40} alt='flipcoin image'/>
         </div>
         <div className="headerButtons">
             <div className="headerButton" onClick={()=> navigate('/rewards')}>
@@ -30,8 +46,8 @@ function Header({currRoute}) {
             <div className="headerButton" onClick={()=> navigate('/transactions')}>
                 Transactions
             </div>
-            <div className="headerButton" onClick={()=> navigate('/refer')}>
-                Refer and Earn
+            <div className="headerButton" onClick={allocateFreeTokens}>
+                Get Free Tokens
             </div>
         </div>
     </div>

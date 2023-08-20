@@ -4,6 +4,7 @@ import Store from "./Components/Store/Store";
 import Redeem from "./Components/Redeem/Redeem";
 import Passbook from "./Components/Passbook/Passbook";
 import { useEffect, useState } from "react";
+import './App.css'
 //Contract Imports
 import contractJson from './Contract/FlipCoin.json'
 const ethers = require("ethers")
@@ -15,10 +16,16 @@ function App() {
     signer:null,
     contract:null,
   })
+  const [user,setUser]=useState();
+  const [balance,setBalance]=useState();
+  const [transactions,setTransactions]=useState();
+  const [loading,setLoading]=useState(false);
+  const [loadingMessage,setLoadingMessage]=useState("CONNECTING METAMASK");
 
   useEffect(()=>{
+      setLoading(true);
       const connectWallet = async ()=>{
-          const contractAddress = "0xE61C91EFe981cA5Cb4cE630dfAa0Cf52b8c75BCE";
+          const contractAddress = "0x63b3611d1d950d09b1707119b3df69aaba5ff18a";
           const contractAbi=contractJson.abi;
           try{
             const {ethereum}=window;
@@ -27,34 +34,63 @@ function App() {
               const provider = new ethers.BrowserProvider(ethereum);
               const signer =await provider.getSigner();
               const contract = new ethers.Contract(contractAddress,contractAbi,signer);
+              const balanceBigInt=await contract._getBalance(signer.address);
+              setBalance(ethers.toNumber(balanceBigInt));
               setState({
                 provider,
                 signer,
                 contract
               })
+              setLoading(false);
             }
             else {
-              alert("Metamask wallet is required to continue forward")
+              setLoadingMessage("Metamask wallet is required to continue forward")
             }
           }
           catch(e){
             console.log(e);
-            alert(e.message);
+            setLoadingMessage(e.message);
           }
       }
       connectWallet();
-      console.log(state)
   },[])
+
+  if(loading==true)
+  return(
+    <div className="App">
+      <div className="fullScreen">
+      <div className="headerImage">
+            <img src='/FlipCoin.png'  alt='Flipcoin Image' className="rotateAnimations"/>
+            <div className="headerContent">
+            <div className="boldHeading loading">
+                Flip
+                <span className="yellow">Coin</span>
+            </div>
+          </div>
+        </div>
+        <img src="MetaMask_Fox.svg.png" height={"100px"} className="metaMask"/>
+        <div className="headerContent loadingMessage">
+          {loadingMessage}
+        </div>
+      </div>
+    </div>  
+  )
 
   return (
     <div className="App">
     <BrowserRouter>
-    <Header currRoute={window.location.pathname}/>
+    <Header 
+      currRoute={window.location.pathname} 
+      balance={balance} 
+      contractState={state}
+      setLoading={setLoading}
+      setLoadingMessage={setLoadingMessage}  
+    />
       <Routes>
-        <Route path='/' element ={<Store/>}/>
-        <Route path='/rewards' element ={<Store/>}/>
-        <Route path='/transactions' element ={<Passbook/>}/>
-        <Route path='/refer' element ={<Redeem/>}/>
+        <Route path='/' element ={<Store balance={balance} contractState={state} setBalance={setBalance}/>}/>
+        <Route path='/rewards' element ={<Store balance={balance} contractState={state} setBalance={setBalance}/>}/>
+        <Route path='/transactions' element ={<Passbook balance={balance} contractState={state} setBalance={setBalance}/>}/>
+        <Route path='/refer' element ={<Redeem balance={balance} contractState={state} setBalance={setBalance}/>}/>
       </Routes>
     </BrowserRouter>
     </div>

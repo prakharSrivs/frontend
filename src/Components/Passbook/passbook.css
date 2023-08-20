@@ -7,7 +7,7 @@
     padding: 0;
     margin-top: 40px;
     background-color: #25313C;
-    width: 420px;
+    width:820px;
     border-radius: 10px;
     display: flex;
     justify-content: center;
@@ -20,7 +20,7 @@
     padding-bottom: 1rem;
     margin-top: 0 ;
     color: rgb(255, 255, 255);
-    font-size: 1.8rem;
+    font-size: 3rem;
     font-weight: 600;
     width: 100%;
     display: flex;
@@ -30,8 +30,9 @@
 }
 .transaction{
     margin: .5rem;
-    width: 380px;
+    width: 780px;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
     font-family:"Quicksand",sans-serif;
@@ -53,4 +54,15 @@
 }
 .amountType{
     margin-right: 1rem;
+}
+.row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+.address{
+    font-size: 0.8rem;
+    overflow: hidden;
 }

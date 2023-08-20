@@ -25,7 +25,7 @@ function App() {
   useEffect(()=>{
       setLoading(true);
       const connectWallet = async ()=>{
-          const contractAddress = "0x63b3611d1d950d09b1707119b3df69aaba5ff18a";
+          const contractAddress = "0x79361a6fda6d06b08ec89e46c6c48eee401b73da";
           const contractAbi=contractJson.abi;
           try{
             const {ethereum}=window;
@@ -35,7 +35,7 @@ function App() {
               const signer =await provider.getSigner();
               const contract = new ethers.Contract(contractAddress,contractAbi,signer);
               const balanceBigInt=await contract._getBalance(signer.address);
-              setBalance(ethers.toNumber(balanceBigInt));
+              setBalance(ethers.formatEther(balanceBigInt));
               setState({
                 provider,
                 signer,
@@ -82,6 +82,7 @@ function App() {
     <Header 
       currRoute={window.location.pathname} 
       balance={balance} 
+      setBalance={setBalance}
       contractState={state}
       setLoading={setLoading}
       setLoadingMessage={setLoadingMessage}  
@@ -90,7 +91,7 @@ function App() {
         <Route path='/' element ={<Store balance={balance} contractState={state} setBalance={setBalance}/>}/>
         <Route path='/rewards' element ={<Store balance={balance} contractState={state} setBalance={setBalance}/>}/>
         <Route path='/transactions' element ={<Passbook balance={balance} contractState={state} setBalance={setBalance}/>}/>
-        <Route path='/refer' element ={<Redeem balance={balance} contractState={state} setBalance={setBalance}/>}/>
+        <Route path='/refer' element ={<Redeem balance={balance} setLoading={setLoading} setLoadingMessage={setLoadingMessage} contractState={state} setBalance={setBalance}/>}/>
       </Routes>
     </BrowserRouter>
     </div>

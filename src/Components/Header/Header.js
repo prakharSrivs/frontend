@@ -14,7 +14,7 @@ function Header({contractState,balance,setBalance,setLoading,setLoadingMessage})
         const {contract,signer}=contractState;
         await contract._mintTo(signer.address,ethers.parseEther("100"));
         const balanceBigInt=await contract._getBalance(signer.address);
-        setBalance(ethers.toNumber(balanceBigInt));            
+        setBalance(ethers.formatEther(balanceBigInt));            
         }
         catch(e){
             alert(e.message);
@@ -37,7 +37,7 @@ function Header({contractState,balance,setBalance,setLoading,setLoadingMessage})
             </span>
         </div>
         <div className="coinBalance">
-            {balance} <img src='/flipCoin.png' width={40} alt='flipcoin image'/>
+            {balance && balance.slice(0,balance.indexOf("."))} <img src='/flipCoin.png' width={40} alt='flipcoin image'/>
         </div>
         <div className="headerButtons">
             <div className="headerButton" onClick={()=> navigate('/rewards')}>

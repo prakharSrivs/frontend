@@ -17,7 +17,7 @@ function Store({contractState,balance,setBalance}) {
 
   const updateBalance=async (contract,signer)=>{
     const balanceBigInt=await contract._getBalance(signer.address);
-    setBalance(ethers.toNumber(balanceBigInt));
+    setBalance(ethers.formatEther(balanceBigInt));
   }
 
   const handleBuyButtonClick=async (index)=>{
